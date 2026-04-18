@@ -5,8 +5,7 @@ edition = "2021"
 description = "Plex & qBittorrent monitor with Pushover notifications"
 
 [dependencies]
-tokio = { version = "1", features = ["rt-multi-thread", "time", "macros"] }
-ureq = "2"
+ureq = { version = "2", features = ["json"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 clap = { version = "4", features = ["derive", "env"] }
