@@ -11,8 +11,7 @@ pub fn check_plex(url: &str, timeout_seconds: u64) -> bool {
 }
 
 pub fn check_qbit(url: &str, timeout_seconds: u64) -> bool {
-    let api_url = format!("{}/api/v2/app/version", url);
-    match ureq::get(&api_url)
+    match ureq::get(url)
         .timeout(Duration::from_secs(timeout_seconds))
         .call()
     {
