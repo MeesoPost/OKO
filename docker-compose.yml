@@ -11,4 +11,4 @@ services:
       - --plex-url=http://192.168.1.169:32400/identity
       - --qbit-url=http://192.168.1.169:8080
       - --nas-url=tcp://192.168.1.139:445
-      - --interval-seconds=60
+      - --interval-seconds=15
