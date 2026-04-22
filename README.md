@@ -6,7 +6,7 @@ Service monitoring daemon — watches Plex, qBittorrent, and your NAS, and sends
 
 1. Copy `.env.example` to `.env` and fill in your [Pushover](https://pushover.net) credentials:
 
-   ```
+   ```shell
    PUSHOVER_TOKEN=...
    PUSHOVER_USER=...
    ```
@@ -15,13 +15,13 @@ Service monitoring daemon — watches Plex, qBittorrent, and your NAS, and sends
 
 3. Start it:
 
-   ```
+   ```shell
    docker compose up -d --build
    ```
 
 4. Tail the logs:
 
-   ```
+   ```shell
    docker compose logs -f oko
    ```
 
@@ -30,7 +30,7 @@ Service monitoring daemon — watches Plex, qBittorrent, and your NAS, and sends
 All options are CLI flags (see `docker-compose.yml`):
 
 | Flag | Default | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | `--plex-url` | _(empty)_ | Plex identity endpoint, e.g. `http://10.0.0.5:32400/identity` |
 | `--qbit-url` | _(empty)_ | qBittorrent WebUI, e.g. `http://10.0.0.5:8080` |
 | `--nas-url` | _(empty)_ | NAS, `http://...` or `tcp://host:port` (e.g. `tcp://10.0.0.10:445` for SMB) |
@@ -60,7 +60,7 @@ For machines running ProtonVPN natively (e.g. a Windows PC with the ProtonVPN de
 3. Reconnect ProtonVPN.
 4. Add the flag to `docker-compose.yml`:
 
-   ```
+   ```yaml
    - --isp-ip=84.22.123.45
    ```
 
@@ -78,7 +78,7 @@ If all three IP providers are unreachable for a cycle, OKO marks the result as u
 
 ## Building locally without Docker
 
-```
+```shell
 cargo build --release
 ./target/release/oko --help
 ```
