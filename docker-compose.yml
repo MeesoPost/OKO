@@ -1,7 +1,6 @@
 services:
   oko:
     build: .
-    image: oko:latest
     container_name: oko
     restart: unless-stopped
     environment:
