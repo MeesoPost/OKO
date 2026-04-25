@@ -1,36 +1,33 @@
 use clap::Parser;
-use std::net::IpAddr;
 
 #[derive(Parser, Debug)]
-#[clap(name = "oko", about = "Service monitoring daemon — sends Pushover alerts when services go down")]
+#[command(name = "oko", about = "Lightweight service monitor with Pushover alerts")]
 pub struct Config {
-    #[clap(long, default_value = "", help = "Plex identity endpoint, e.g. http://192.168.1.10:32400/identity (empty = disabled)")]
-    pub plex_url: String,
+    /// Path to services config file
+    #[arg(long, env = "OKO_CONFIG", default_value = "services.toml")]
+    pub config_path: String,
 
-    #[clap(long, default_value = "", help = "qBittorrent WebUI base URL, e.g. http://192.168.1.10:8080 (empty = disabled)")]
-    pub qbit_url: String,
-
-    #[clap(long, default_value = "", help = "NAS check URL — http(s)://... or tcp://host:port, e.g. tcp://192.168.1.20:445 (empty = disabled)")]
-    pub nas_url: String,
-
-    #[clap(long, help = "Your ISP's public IPv4. When set, OKO alerts if current public IP matches this (VPN leak). Leave unset to disable.")]
-    pub isp_ip: Option<IpAddr>,
-
-    #[clap(long, env = "PUSHOVER_TOKEN", help = "Pushover application token")]
-    pub pushover_token: String,
-
-    #[clap(long, env = "PUSHOVER_USER", help = "Pushover user key")]
-    pub pushover_user: String,
-
-    #[clap(long, default_value = "60", help = "Check interval in seconds")]
+    /// Check interval in seconds
+    #[arg(long, default_value = "60")]
     pub interval_seconds: u64,
 
-    #[clap(long, default_value = "5", help = "HTTP request timeout in seconds")]
+    /// HTTP/TCP request timeout in seconds
+    #[arg(long, default_value = "5")]
     pub timeout_seconds: u64,
 
-    #[clap(long, default_value = "2", help = "Consecutive failures before marking a service as down")]
+    /// Consecutive failures before alerting
+    #[arg(long, default_value = "2")]
     pub failure_threshold: u32,
 
-    #[clap(long, default_value = "30", help = "Wait this many seconds at startup before first check (lets services settle after host reboot)")]
+    /// Wait this many seconds at startup before first check
+    #[arg(long, default_value = "30")]
     pub startup_grace_seconds: u64,
+
+    /// Pushover application token
+    #[arg(long, env = "PUSHOVER_TOKEN")]
+    pub pushover_token: String,
+
+    /// Pushover user key
+    #[arg(long, env = "PUSHOVER_USER")]
+    pub pushover_user: String,
 }

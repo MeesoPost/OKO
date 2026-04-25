@@ -1,5 +1,5 @@
 # Stage 1: compile
-FROM rust:latest-alpine AS builder
+FROM rust:alpine AS builder
 RUN apk add --no-cache musl-dev
 WORKDIR /build
 
